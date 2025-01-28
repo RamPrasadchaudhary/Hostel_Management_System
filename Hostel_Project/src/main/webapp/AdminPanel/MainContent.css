@@ -1,0 +1,91 @@
+/* Main Content Styles */
+body {
+  margin: 0; /* Remove any default margin for body */
+}
+
+.main-content {
+ 
+  margin-left:160px; /* Ensure there is no left margin */
+  transition: margin-left 0.3s ease-in-out;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 28px;
+  color: #333;
+}
+
+/* Dashboard Overview */
+.dashboard-overview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.overview-card {
+  flex: 1 1 calc(20% - 20px); /* Responsive width */
+  background-color: #f4f6f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #333;
+}
+
+.overview-card i {
+  font-size: 40px;
+  color: #3498db;
+}
+
+.overview-info {
+  text-align: right;
+}
+
+h3 {
+  font-size: 24px;
+  margin: 0;
+  color: #2c3e50;
+}
+
+p {
+  font-size: 16px;
+  color: #7f8c8d;
+}
+
+/* Section Content */
+.section-content {
+  margin-top: 40px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  color: #7f8c8d;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .dashboard-overview {
+    flex-direction: column;
+  }
+
+  .overview-card {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
