@@ -1,0 +1,115 @@
+
+
+
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-left:250px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Header Styling */
+header h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Complaint Dashboard */
+.complaints-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* Complaint Box */
+.complaint-box {
+    flex: 1 1 calc(50% - 20px); /* 50% width minus half the gap */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Complaint Heading */
+.complaint-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.complaint-heading h2 {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.arrow-icon {
+    font-size: 1.2em;
+    color: #888;
+    transition: transform 0.3s ease;
+}
+
+.arrow-icon.rotate {
+    transform: rotate(180deg);
+}
+
+/* Complaint Details */
+.complaint-details {
+    display: none;
+    margin-top: 10px;
+}
+
+.complaint p {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.pending {
+    color: #f39c12;
+}
+
+.status.in-progress {
+    color: #3498db;
+}
+
+.status.resolved {
+    color: #2ecc71;
+}
+
+/* View Details Button */
+.view-details-btn {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+	.main-content {
+max-width:auto;
+    margin-left:0px;
+    
+}
+    .complaint-box {
+        flex: 1 1 100%; /* Full width on smaller screens */
+    }
+}

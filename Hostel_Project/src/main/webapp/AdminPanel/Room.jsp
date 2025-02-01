@@ -1,68 +1,110 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ include file="SideBar.jsp" %> <!-- Sidebar Included -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Room</title>
- <style>
-    /* General Styling for the Heading Component */
-.heading-container {
-margin-left:110px;
-margin-bottom:100px;
-    text-align: center; /* Center align the heading */
-    padding: 10px 15px; /* Space around the heading */
-     background-color: blue; /* Blue background color */
-    color: white; /* White text color */
-    border-bottom: 4px solid #0056b3; /* Add a darker border for effect */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow below the header */
-  }
-  
-  .heading-title {
-  color:white;
-    font-size: 2.5rem; /* Large font size for the title */
-    margin: 0; /* Remove default margin */
-    font-weight: bold; /* Bold font */
-    color:white;
-  }
-  
-  .heading-subtitle {
-    font-size: 1.2rem; /* Smaller font size for the subtitle */
-    margin: 10px 0 0 0; /* Add space above the subtitle */
-    font-weight: 400; /* Regular font weight */
-    color:white;
-  }
- 
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .heading-title {
-      font-size: 2rem; /* Adjust title font size for tablets */
-    }
-  .heading-container{
-  margin-bottom:10px;
-  margin-left:0px}
-    .heading-subtitle {
-      font-size: 1rem; /* Adjust subtitle font size */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .heading-title {
-      font-size: 1.8rem; /* Smaller font size for mobile devices */
-    }
-  
-    .heading-subtitle {
-      font-size: 0.9rem; /* Adjust subtitle font size for mobile */
-    }
-  }
-  
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="room.css">
+    <link rel="stylesheet" href="Heading.css">
+   
 </head>
 <body>
-<div class="heading-container">
-      <h3 class="heading-title">Room Record</h3>
-     <p class="heading-subtitle">This is Room Record</p>
-      
+    <!-- Sidebar Included -->
+    <%@ include file="SideBar.jsp" %>
+    <!-- Main Content -->
+     <div class="heading-container">
+                <h3 class="heading-title">Room Management</h3>
+                <p class="heading-subtitle">Manage all rooms in one place</p>
+            </div>
+    <div class="main-content">
+        <div class="container">
+           
+
+            <div class="filters">
+                <input type="text" placeholder="Search by room number or occupant">
+                <select>
+                    <option value="all">All Rooms</option>
+                    <option value="vacant">Vacant Rooms</option>
+                    <option value="filled">Filled Rooms</option>
+                </select>
+                <button class="add-room-button" onclick="openModal('add')">Add Room</button>
+            </div>
+
+            <div class="room-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Number</th>
+                            <th>Status</th>
+                            <th>Occupant</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>101</td>
+                            <td>Vacant</td>
+                            <td>N/A</td>
+                            <td>
+                                <button class="allocate-button" onclick="openModal('allocate')">Allocate</button>
+                                <button class="delete-button">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>102</td>
+                            <td>Filled</td>
+                            <td>Ashish Raj</td>
+                            <td>
+                                <button class="delete-button">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
+    <!-- Add Room Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <h3>Add New Room</h3>
+            <div class="form-group">
+                <label>Room Number</label>
+                <input type="text" placeholder="Enter Room Number">
+            </div>
+            <div class="modal-buttons">
+                <button class="add-btn">Add Room</button>
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Allocate Room Modal -->
+    <div id="allocateModal" class="modal">
+        <div class="modal-content">
+            <h3>Allocate Room</h3>
+            <div class="form-group">
+                <label>Occupant Name</label>
+                <input type="text" placeholder="Enter Name">
+            </div>
+            <div class="modal-buttons">
+                <button class="allocate-btn">Allocate</button>
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(type) {
+            document.getElementById(type + "Modal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => modal.style.display = "none");
+        }
+    </script>
 </body>
 </html>

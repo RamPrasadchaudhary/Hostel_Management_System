@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+ .heading-container {
+margin-left:110px;
+margin-top:50px;
+margin-bottom:30px;
+    text-align: center; /* Center align the heading */
+    padding: 10px 15px; /* Space around the heading */
+     background-color: blue; /* Blue background color */
+    color: white; /* White text color */
+    border-bottom: 4px solid #0056b3; /* Add a darker border for effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow below the header */
+  }
+  
+  .heading-title {
+  color:white;
+    font-size: 2.5rem; /* Large font size for the title */
+    margin: 0; /* Remove default margin */
+    font-weight: bold; /* Bold font */
+    color:white;
+  }
+  
+  .heading-subtitle {
+    font-size: 1.2rem; /* Smaller font size for the subtitle */
+    margin: 10px 0 0 0; /* Add space above the subtitle */
+    font-weight: 400; /* Regular font weight */
+    color:white;
+  }
+ 
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .heading-title {
+      font-size: 2rem; /* Adjust title font size for tablets */
+    }
+  .heading-container{
+  margin-bottom:10px;
+  margin-top:0px;
+  margin-left:0px}
+    .heading-subtitle {
+      font-size: 1rem; /* Adjust subtitle font size */
+    }
+  }
+  
+  @media (max-width: 480px) {
+  
+    .heading-container{
+
+  margin-top:0px;}
+  
+    .heading-title {
+      font-size: 1.8rem; /* Smaller font size for mobile devices */
+    }
+  
+    .heading-subtitle {
+      font-size: 0.9rem; /* Adjust subtitle font size for mobile */
+    }
+  }
+  

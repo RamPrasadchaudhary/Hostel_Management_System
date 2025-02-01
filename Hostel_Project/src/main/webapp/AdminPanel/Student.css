@@ -1,0 +1,278 @@
+
+.student-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Header */
+.student-header {
+    text-align: center;
+    color: #34495e;
+    margin-bottom: 20px;
+}
+
+/* Search Section */
+.student-search-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.student-search-box {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 200px;
+}
+
+.student-search-btn,
+.student-reset-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+.student-reset-btn {
+    background-color: #dc3545;
+}
+
+.student-search-btn:hover,
+.student-reset-btn:hover {
+    opacity: 0.8;
+}
+
+/* Filter Section */
+.student-filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.student-filter-dropdown {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #34495e;
+}
+
+/* Add Student Button */
+.student-add-btn {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px auto;
+}
+
+.student-add-btn:hover {
+    background-color: #218838;
+}
+
+/* Student Table */
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+.student-table th,
+.student-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.student-table th {
+    background-color: #f2f2f2;
+}
+
+.student-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.student-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive Table */
+.student-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.student-action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.student-edit-link {
+    color: green;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.student-delete-link {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Form Popup */
+.student-form-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    z-index: 1000;
+}
+
+/* Form Groups */
+.student-form-group {
+    margin-bottom: 10px;
+}
+
+.student-form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.student-form-group input,
+.student-form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Buttons */
+.student-submit-btn,
+.student-cancel-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+}
+
+.student-submit-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.student-cancel-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* 🌐 Large Screens (Desktops) */
+@media (max-width: 1200px) {
+    .student-container {
+        max-width: 95%;
+    }
+}
+
+/* 📱 Medium Screens (Tablets, Small Laptops) */
+@media (max-width: 992px) {
+    .student-search-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .student-search-box,
+    .student-search-btn,
+    .student-reset-btn {
+        width: 100%;
+    }
+
+    .student-filter-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .student-table-container {
+        overflow-x: auto;
+    }
+
+    .student-action-buttons {
+        flex-direction: column;
+    }
+}
+
+/* 📱 Small Screens (Mobile Devices) */
+@media (max-width: 768px) {
+    .student-container {
+        padding: 15px;
+    }
+
+    .student-header h1 {
+        font-size: 22px;
+    }
+
+    .student-table th,
+    .student-table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .student-search-box {
+        font-size: 14px;
+    }
+
+    .student-form-popup {
+        width: 95%;
+    }
+}
+
+/* 📱 Extra Small Screens (Very Small Phones) */
+@media (max-width: 480px) {
+    .student-header h1 {
+        font-size: 18px;
+    }
+
+    .student-table th,
+    .student-table td {
+        font-size: 12px;
+    }
+
+    .student-search-box,
+    .student-search-btn,
+    .student-reset-btn {
+        font-size: 14px;
+    }
+
+    .student-add-btn {
+        font-size: 14px;
+    }
+}

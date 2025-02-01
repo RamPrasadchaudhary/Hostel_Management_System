@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Heading Container */
+
+
+/* Report */
+.report {
+    max-width: 1200px;
+    margin-left:300px;
+   padding: 20px;
+}
+
+.report__header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.report__title {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.report__month-label {
+    font-size: 1.2em;
+    color: #666;
+}
+
+.report__print-section {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.report__print-btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.report__print-btn:hover {
+    background-color: #218838;
+}
+
+.report__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.report__card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 300px;
+    max-width: 400px;
+}
+
+.report__heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.report__heading {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.report__section-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+
+.report__section-btn:hover {
+    background-color: #0056b3;
+}
+
+.report__card-content p {
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+.report__logo-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.report__logo-img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .report__title {
+        font-size: 2em;
+    }
+
+    .report__card {
+        max-width: 100%;
+    }
+
+    .report__section-btn,
+    .report__print-btn {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+    .report {
+   
+    margin-left:0px;
+ 
+}
+}
+
+@media (max-width: 480px) {
+    .report__title {
+        font-size: 1.5em;
+    }
+   .report {
+   
+    margin-left:0px;
+ 
+}
+    .report__section-btn,
+    .report__print-btn {
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+}

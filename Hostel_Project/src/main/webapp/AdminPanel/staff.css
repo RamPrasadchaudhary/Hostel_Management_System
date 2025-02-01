@@ -1,0 +1,176 @@
+ .manage-staff-wrapper {
+    display: flex;
+    margin-left:300px; /* Reserve space for sidebar */
+    padding: 20px;
+    background-color: #f9fafb; /* Light background */
+    min-height:50vh; /* Full page height */
+    box-sizing: border-box;
+  }
+  
+  .manage-staff-container {
+    flex: 1;
+    background-color: #ffffff; /* White background for content */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  /* Title */
+  .manage-staff-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #34495e;
+  }
+  
+  /* Filters Section */
+  .staff-filters {
+    display: flex;
+    flex-wrap: wrap; /* Wrap filters on small screens */
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .staff-filters input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .staff-filters select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .staff-filters button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .staff-filters .search-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .staff-filters .search-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .staff-filters .reset-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .staff-filters .reset-button:hover {
+    background-color: #a71d2a;
+  }
+  
+  .staff-filters .add-staff-button {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .staff-filters .add-staff-button:hover {
+    background-color: #218838;
+  }
+  
+  /* Table Styling */
+  .staff-list {
+    margin-top: 20px;
+  }
+  
+  .staff-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .staff-table th,
+  .staff-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
+  
+  .staff-table th {
+    background-color: #f1f1f1;
+    color: #34495e;
+  }
+  
+  .staff-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .staff-table tr:hover {
+    background-color: #f2f2f2;
+  }
+  
+  /* Action Buttons */
+  .action-button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    width:150px;
+    border: none;
+    color: white;
+  }
+  
+  .action-button.view {
+    background-color: #17a2b8;
+  }
+  
+  .action-button.view:hover {
+    background-color: #138496;
+  }
+  
+  .action-button.edit {
+    background-color: #ffc107;
+  }
+  
+  .action-button.edit:hover {
+    background-color: #e0a800;
+  }
+  
+  .action-button.delete {
+    background-color: #dc3545;
+  }
+  
+  .action-button.delete:hover {
+    background-color: #a71d2a;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .manage-staff-wrapper {
+      margin-left: 10px; /* Adjust for smaller sidebar */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .staff-filters {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .action-button{
+        width:auto !important;
+    }
+    .staff-filters button {
+      width: 100%; /* Full-width buttons */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .staff-table th,
+    .staff-table td {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  

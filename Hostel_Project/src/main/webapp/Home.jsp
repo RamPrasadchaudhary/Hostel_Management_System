@@ -1,5 +1,3 @@
-
-
 <!-- Include Header -->
 <jsp:include page="Header.jsp" />
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -130,47 +128,24 @@
         <div class="hero-section">
             <div class="carousel-news-container">
                 <div class="carousel">
-                    <% 
-                        String[][] carouselImages = {
-                            {"image3.png", "Comfortable Rooms for a Relaxing Stay"},
-                            {"image2.png", "Enjoy Delicious and Nutritious Meals"},
-                            {"Hostel.png", "A Friendly Community You'll Love"}
-                        };
-                        for (int i = 0; i < carouselImages.length; i++) {
-                    %>
-                    <div class="carousel-item">
-                        <img src="<%= carouselImages[i][0] %>" alt="Slide <%= i + 1 %>" />
-                        <div class="carousel-caption">
-                            <h1>Welcome To Munnu Hostel</h1>
-                            <p><%= carouselImages[i][1] %></p>
-                        </div>
-                    </div>
-                    <% } %>
-                </div>
-                <div class="latest-news">
-                    <h3>Notice and News</h3>
-                    <div class="news-container">
-                        <div class="news-scroller">
-                            <% 
-                                String[] latestNews = {
-                                    "🌟 Exclusive Deal: Stay for 5 nights, pay for 4!",
-                                    "🍳 Breakfast is now included with all bookings.",
-                                    "🛏 Private rooms now available for solo travelers!",
-                                    "🎨 Art and craft workshop this Sunday at 4 PM.",
-                                    "📚 Study zones upgraded with high-speed WiFi.",
-                                    "🎶 Join our weekly karaoke nights every Thursday!",
-                                    "🚴 Bike rentals are now available for exploring the area.",
-                                    "🎂 Celebrate your special day with us and enjoy a free dinner!",
-                                    "🧹 Deep cleaning scheduled for all rooms this weekend.",
-                                    "🔥 Bonfire night: Join us for marshmallows and stories on Saturday!"
-                                };
-                                for (String news : latestNews) {
-                            %>
-                            <div class="news-item"><%= news %></div>
-                            <% } %>
-                        </div>
-                    </div>
-                </div>
+				    <% 
+				        String[][] carouselImages = {
+				            {"image3.png", "Comfortable Rooms for a Relaxing Stay"},
+				            {"image2.png", "Enjoy Delicious and Nutritious Meals"},
+				            {"Hostel.png", "A Friendly Community You'll Love"}
+				        };
+				        for (int i = 0; i < carouselImages.length; i++) {
+				    %>
+				    <div class="carousel-item <%= (i == 0) ? "active" : "" %>">
+				        <img src="Image/<%= carouselImages[i][0] %>" alt="Slide <%= i + 1 %>" />
+				        <div class="carousel-caption">
+				            <h1>Welcome To Munnu Hostel</h1>
+				            <p><%= carouselImages[i][1] %></p>
+				        </div>
+				    </div>
+				    <% } %>
+				</div>
+               
             </div>
         </div>
 
@@ -186,7 +161,7 @@
                 <button class="btn-secondary">Learn More</button>
             </div>
             <div class="about-image">
-                <img src="Hostel.png" alt="About Munnu Hostel" />
+                <img src="Image/Hostel.png" alt="About Munnu Hostel" />
             </div>
         </section>
 
@@ -236,6 +211,31 @@
         </section>
     </div>
 </body>
+<script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.carousel-item');
+    const totalSlides = slides.length;
+
+    // Function to show the next slide
+    function showNextSlide() {
+        slides[currentIndex].classList.remove('active');  // Hide current slide
+        currentIndex = (currentIndex + 1) % totalSlides;  // Move to the next slide (loop back to first)
+        slides[currentIndex].classList.add('active');  // Show next slide
+    }
+
+    // Function to show the previous slide
+    function showPrevSlide() {
+        slides[currentIndex].classList.remove('active');  // Hide current slide
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;  // Move to the previous slide (loop to last)
+        slides[currentIndex].classList.add('active');  // Show previous slide
+    }
+
+    // Auto slide every 5 seconds
+    setInterval(showNextSlide, 5000);
+
+    // Optional: You can add event listeners for buttons to control the slide manually
+    // For example, you could have previous and next buttons and call `showNextSlide()` or `showPrevSlide()`
+</script>
 </html>
 <!-- Include Header -->
 <jsp:include page="Footer.jsp" />
