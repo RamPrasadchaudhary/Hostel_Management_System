@@ -1,0 +1,127 @@
+/* Reset some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+    height: 100%;
+    background-color:blue;
+}
+
+/* Center the login container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Form wrapper */
+.form-wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Form title */
+h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #333333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Input form styles */
+.inputForm {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0.5rem;
+    background-color: #f9f9f9;
+}
+
+.inputForm i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    color: #888888;
+}
+
+.inputForm .input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+    padding: 0.3rem;
+}
+
+/* Submit button */
+.button-submit {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.button-submit:hover {
+    background-color: #45a049;
+}
+
+/* Error and logout message styles */
+.error-message, .logout-message {
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #f44336;
+}
+
+.logout-message {
+    background-color: #4caf50;
+}
+
+/* Traffic counter */
+#traffic-counter {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555555;
+}
+
+.traffic-number {
+    font-weight: bold;
+    color: #333333;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .form-wrapper {
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .button-submit {
+        font-size: 0.9rem;
+        padding: 0.7rem;
+    }
+}

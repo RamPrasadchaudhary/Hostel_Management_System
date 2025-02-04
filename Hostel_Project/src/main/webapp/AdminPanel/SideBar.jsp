@@ -31,7 +31,7 @@
             top: 0;
             left: 0;
             transition: transform 0.3s ease-in-out;
-              background-color:blue;
+            background-color: #3498db; /* Blue sidebar background */
         }
 
         #hostelAdminSidebar .sidebar-brand {
@@ -120,16 +120,70 @@
                 width: calc(100% - 250px);
             }
         }
+       
+       
+       
+       
+       
+        .header {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            margin-botton:0px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .user-info {
+            font-size: 16px;
+            color: #333;
+        }
+        .logout-btn {
+            padding: 8px 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+
     </style>
 </head>
 <body>
-
+ <%-- Session Check --%>
+    <%
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+        response.setHeader("Expires", "0"); // Proxies
+        
+        if(session.getAttribute("username") == null || session.getAttribute("role") == null) {
+            response.sendRedirect("../Login.jsp");
+            return;
+        }
+        
+        if(!"admin".equalsIgnoreCase((String) session.getAttribute("role"))) {
+            response.sendRedirect("../AccessDenied.jsp");
+            return;
+        }
+    %>
+     <div class="header">
+        <div class="user-info">
+            Welcome, ${sessionScope.username} (${sessionScope.role})
+        </div>
+		  <form action="${pageContext.request.contextPath}/logout" method="post">
+            <input type="submit" class="logout-btn" value="Logout">
+        </form>
+    </div>
     <!-- Sidebar -->
     <aside id="hostelAdminSidebar">
     
         <div class="sidebar-brand">
             <i class="fas fa-user-shield"></i> Hostel Admin
         </div>
+        
         <ul class="sidebar-menu">
             <li class="sidebar-item">
                 <a class="sidebar-link" href="MainContent.jsp">

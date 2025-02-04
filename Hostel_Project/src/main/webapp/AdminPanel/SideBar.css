@@ -1,0 +1,112 @@
+  /* Basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+          
+            height: 100vh;
+                      
+        }
+
+        /* Sidebar styles */
+        #hostelAdminSidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease-in-out;
+            background-color: #3498db; /* Blue sidebar background */
+        }
+
+        #hostelAdminSidebar .sidebar-brand {
+            padding: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #hostelAdminSidebar .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        #hostelAdminSidebar .sidebar-item {
+            padding: 15px 20px;
+            
+
+        }
+
+        #hostelAdminSidebar .sidebar-link {
+            color:black ;
+            height:35px;
+            border-radius:5px;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s;
+            background-color:white;
+            padding-left:20px;
+            
+        }
+
+        #hostelAdminSidebar .sidebar-link i {
+            margin-right: 10px;
+            color:blue;
+        }
+
+        #hostelAdminSidebar .sidebar-link:hover {
+            background-color: #444;
+        }
+
+        /* Main content area */
+        #mainContent {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            width: calc(100% - 250px);
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        /* Hamburger menu */
+        #hamburgerButton {
+            display: none;
+            font-size: 30px;
+            color: #333;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            #hostelAdminSidebar {
+                transform: translateX(-100%);
+            }
+
+            #hostelAdminSidebar.show {
+                transform: translateX(0);
+            }
+
+            #hamburgerButton {
+                display: block;
+            }
+
+            #mainContent {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            #hostelAdminSidebar.show + #mainContent {
+                margin-left: 250px;
+                width: calc(100% - 250px);
+            }
+        }

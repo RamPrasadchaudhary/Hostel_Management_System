@@ -2,11 +2,11 @@
 
  .heading-container {
 margin-left:110px;
-margin-top:50px;
+margin-top:10px;
 margin-bottom:30px;
     text-align: center; /* Center align the heading */
     padding: 10px 15px; /* Space around the heading */
-     background-color: blue; /* Blue background color */
+    background-color: #3498db; /* Blue sidebar background */
     color: white; /* White text color */
     border-bottom: 4px solid #0056b3; /* Add a darker border for effect */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow below the header */
