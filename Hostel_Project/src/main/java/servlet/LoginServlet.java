@@ -34,46 +34,52 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        try (Connection conn = DatabaseConnection.getConnection(); 
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM login WHERE role = ? AND username = ? AND password = ?")) {
-            
+        Connection conn = null;
+        try {
+            conn = DatabaseConnection.getConnection(); // Get new connection
+            if (conn == null || conn.isClosed()) {
+                throw new Exception("Database connection failed!");
+            }
+
+            PreparedStatement stmt = conn.prepareStatement(
+                "SELECT * FROM login WHERE role = ? AND username = ? AND password = ?"
+            );
             stmt.setString(1, role);
             stmt.setString(2, username);
-            stmt.setString(3, password);
+            stmt.setString(3, password); 
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("username", username);
-                    session.setAttribute("role", role);
-                    
-                    switch (role.toLowerCase()) {
-                        case "student":
-                            response.sendRedirect("studentDashboard.jsp");
-                            break;
-                        case "staff":
-                            response.sendRedirect("staffDashboard.jsp");
-                            break;
-                        case "warden":
-                            response.sendRedirect("wardenDashboard.jsp");
-                            break;
-                        case "admin":
-                            response.sendRedirect("AdminPanel/MainContent.jsp");
-                            break;
-                        default:
-                            request.setAttribute("errorMessage", "❌ Invalid role!");
-                            request.getRequestDispatcher("Login.jsp").forward(request, response);
-                            break;
-                    }
-                } else {
-                    request.setAttribute("errorMessage", "❌ Invalid username, password, or role!");
-                    request.getRequestDispatcher("Login.jsp").forward(request, response);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("username", username);
+                session.setAttribute("role", role);
+                session.setMaxInactiveInterval(30 * 60); // 30 minutes timeout
+
+                // Redirect based on role
+                switch (role.toLowerCase()) {
+                    case "student": response.sendRedirect("StudentPanel/dashboard.jsp"); break;
+                    case "staff": response.sendRedirect("StaffPanel/staff/index.jsp"); break;
+                    case "admin": response.sendRedirect("AdminPanel/MainContent.jsp"); break;
+                    default:
+                        request.setAttribute("errorMessage", "❌ Invalid role!");
+                        request.getRequestDispatcher("Login.jsp").forward(request, response);
+                        break;
                 }
+            } else {
+                request.setAttribute("errorMessage", "❌ Invalid username, password, or role!");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
             }
+            
+            // Close resources
+            rs.close();
+            stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "⚠️ Internal server error. Please try again.");
+            request.setAttribute("errorMessage", "⚠️ Internal server error: " + e.getMessage());
             request.getRequestDispatcher("Login.jsp").forward(request, response);
+        } finally {
+            DatabaseConnection.closeConnection(conn); // Ensure the connection is closed
         }
     }
+
 }

@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setHeader("Expires", "0");
 
+    if (session.getAttribute("username") == null || session.getAttribute("role") == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,28 +163,15 @@
 </head>
 <body>
  <%-- Session Check --%>
-    <%
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-        response.setHeader("Expires", "0"); // Proxies
-        
-        if(session.getAttribute("username") == null || session.getAttribute("role") == null) {
-            response.sendRedirect("../Login.jsp");
-            return;
-        }
-        
-        if(!"admin".equalsIgnoreCase((String) session.getAttribute("role"))) {
-            response.sendRedirect("../AccessDenied.jsp");
-            return;
-        }
-    %>
+
      <div class="header">
         <div class="user-info">
-            Welcome, ${sessionScope.username} (${sessionScope.role})
+            <h3 style="margin-right:100px; color:green;">Welcome, <%= session.getAttribute("username") %>  </h3>
         </div>
-		  <form action="${pageContext.request.contextPath}/logout" method="post">
-            <input type="submit" class="logout-btn" value="Logout">
-        </form>
+		  <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
+    <input type="submit" class="logout-btn" value="Logout">
+</form>
+
     </div>
     <!-- Sidebar -->
     <aside id="hostelAdminSidebar">

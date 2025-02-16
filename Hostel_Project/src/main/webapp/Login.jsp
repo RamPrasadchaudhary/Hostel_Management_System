@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setHeader("Expires", "0"); // Proxies
+%>
+    
 <jsp:include page="Header.jsp" />
 <!DOCTYPE html>
 <html>
@@ -22,7 +29,6 @@
                             <option value="" disabled selected>Select your role</option>
                             <option value="student">Student</option>
                             <option value="staff">Staff</option>
-                            <option value="warden">Warden</option>
                             <option value="admin">Admin</option>
                         </select>
                     </div>

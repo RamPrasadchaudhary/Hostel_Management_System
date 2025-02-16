@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- Sidebar Included -->
-    <%@ include file="SideBar.jsp" %>
+
     <!-- Main Content -->
      <div class="heading-container">
                 <h3 class="heading-title">Room Management</h3>

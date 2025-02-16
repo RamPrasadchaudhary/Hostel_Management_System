@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ include file="Header.jsp" %>
+     
+     <%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setHeader("Expires", "0");
+
+    if (session.getAttribute("username") == null || session.getAttribute("role") == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +28,9 @@
             <div class="head">
                 <h2>Profile Details</h2>
                 <div class="sub-head">
+                	<a>Welcome, <%= session.getAttribute("username") %></a>
                     <a href="profile.jsp" class="edit-profile-btn">Edit Profile</a>
-                    <a href="../../index.jsp" class="logout-btn">Logout</a>
+                    <a href="${pageContext.request.contextPath}/LogoutServlet" class="logout-btn">Logout</a>
                 </div>
             </div>
             
