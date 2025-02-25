@@ -9,11 +9,11 @@
 </head>
 <body>
     <!-- Include Header -->
-    <jsp:include page="Header.jsp" />
+
 
 <jsp:include page="Home.jsp" />
 
     <!-- Include Footer -->
-    <jsp:include page="Footer.jsp" />
+ 
 </body>
 </html>

@@ -1,176 +1,292 @@
- .manage-staff-wrapper {
+/* Main Wrapper */
+.manage-staff-wrapper {
     display: flex;
-    margin-left:300px; /* Reserve space for sidebar */
+    margin-left: 250px; /* Match sidebar width */
     padding: 20px;
-    background-color: #f9fafb; /* Light background */
-    min-height:50vh; /* Full page height */
+    background-color: #f9fafb;
+    min-height: 100vh;
     box-sizing: border-box;
-  }
-  
-  .manage-staff-container {
+}
+
+/* Container */
+.manage-staff-container {
     flex: 1;
-    background-color: #ffffff; /* White background for content */
+    background-color: #ffffff;
     border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  /* Title */
-  .manage-staff-container h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #34495e;
-  }
-  
-  /* Filters Section */
-  .staff-filters {
+    padding: 30px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Filters */
+.staff-filters form {
     display: flex;
-    flex-wrap: wrap; /* Wrap filters on small screens */
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .staff-filters input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .staff-filters select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .staff-filters button {
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.staff-filters input[type="text"],
+.staff-filters select {
     padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    min-width: 200px;
+    flex: 1 1 auto;
+}
+
+/* Buttons */
+.staff-filters button {
+    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .staff-filters .search-button {
-    background-color: #007bff;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-button {
+    background-color: #4CAF50;
     color: white;
-  }
-  
-  .staff-filters .search-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .staff-filters .reset-button {
-    background-color: #dc3545;
+}
+
+.search-button:hover {
+    background-color: #45a049;
+}
+
+.reset-button {
+    background-color: #f44336;
     color: white;
-  }
-  
-  .staff-filters .reset-button:hover {
-    background-color: #a71d2a;
-  }
-  
-  .staff-filters .add-staff-button {
-    background-color: #28a745;
+}
+
+.reset-button:hover {
+    background-color: #da190b;
+}
+
+.add-staff-button {
+    background-color: #2196F3;
     color: white;
-  }
-  
-  .staff-filters .add-staff-button:hover {
-    background-color: #218838;
-  }
-  
-  /* Table Styling */
-  .staff-list {
-    margin-top: 20px;
-  }
-  
-  .staff-table {
+    margin-left: auto;
+}
+
+.add-staff-button:hover {
+    background-color: #1976D2;
+}
+
+/* Staff Table */
+.staff-table {
     width: 100%;
     border-collapse: collapse;
-  }
-  
-  .staff-table th,
-  .staff-table td {
-    padding: 12px;
+    margin-top: 20px;
+}
+
+.staff-table th,
+.staff-table td {
+    padding: 12px 15px;
     text-align: left;
-    border: 1px solid #ccc;
-  }
-  
-  .staff-table th {
-    background-color: #f1f1f1;
-    color: #34495e;
-  }
-  
-  .staff-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .staff-table tr:hover {
-    background-color: #f2f2f2;
-  }
-  
-  /* Action Buttons */
-  .action-button {
-    padding: 5px 10px;
-    margin-right: 5px;
-    border-radius: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.staff-table th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.staff-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Action Buttons */
+.action-button {
+    padding: 6px 12px;
+    margin: 0 4px;
+    border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
-    width:150px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     border: none;
+}
+
+.action-button.view {
+    background-color: #2196F3;
     color: white;
-  }
-  
-  .action-button.view {
-    background-color: #17a2b8;
-  }
-  
-  .action-button.view:hover {
-    background-color: #138496;
-  }
-  
-  .action-button.edit {
-    background-color: #ffc107;
-  }
-  
-  .action-button.edit:hover {
-    background-color: #e0a800;
-  }
-  
-  .action-button.delete {
-    background-color: #dc3545;
-  }
-  
-  .action-button.delete:hover {
-    background-color: #a71d2a;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 1024px) {
+}
+
+.action-button.edit {
+    background-color: #FFC107;
+    color: black;
+}
+
+.action-button.delete {
+    background-color: #F44336;
+    color: white;
+}
+
+/* MODAL STYLES */
+/* MODAL STYLES */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+/* Centering the modal properly */
+.modal-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+}
+
+
+/* Form Styling */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="date"],
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Button Styling */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.modal-content button[type="submit"],
+.modal-content button[type="button"] {
+    width: 48%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.modal-content button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modal-content button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.modal-content button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-content button[type="button"]:hover {
+    background-color: #d32f2f;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
     .manage-staff-wrapper {
-      margin-left: 10px; /* Adjust for smaller sidebar */
+        margin-left: 0;
+        padding: 15px;
     }
-  }
-  
-  @media (max-width: 768px) {
-    .staff-filters {
-      flex-direction: column;
-      align-items: stretch;
+
+    .staff-filters form {
+        flex-direction: column;
     }
-    .action-button{
-        width:auto !important;
+
+    .add-staff-button {
+        margin-left: 0;
     }
-    .staff-filters button {
-      width: 100%; /* Full-width buttons */
+
+    .modal-content {
+        width: 90%;
+        padding: 20px;
     }
-  }
-  
-  @media (max-width: 480px) {
-    .staff-table th,
-    .staff-table td {
-      font-size: 14px;
-      padding: 8px;
+}
+
+@media (max-width: 480px) {
+    .staff-filters input[type="text"],
+    .staff-filters select {
+        min-width: 100%;
     }
-  }
-  
+
+    .modal-content input,
+    .modal-content select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .modal-content button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-content button[type="submit"],
+    .modal-content button[type="button"] {
+        width: 100%;
+    }
+}

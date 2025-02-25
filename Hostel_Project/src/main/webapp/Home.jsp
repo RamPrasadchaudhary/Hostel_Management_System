@@ -1,6 +1,6 @@
 <!-- Include Header -->
-<jsp:include page="Header.jsp" />
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:include page="Header.jsp" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -211,6 +211,8 @@
         </section>
     </div>
 </body>
+
+<jsp:include page="Footer.jsp" />
 <script>
     let currentIndex = 0;
     const slides = document.querySelectorAll('.carousel-item');
@@ -238,4 +240,3 @@
 </script>
 </html>
 <!-- Include Header -->
-<jsp:include page="Footer.jsp" />

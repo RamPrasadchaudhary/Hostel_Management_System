@@ -39,10 +39,7 @@
             <nav id="navbar" class="navbar">
                 <ul class="nav-links">
                     <li><a href="Home.jsp" class="nav-link">Home</a></li>
-                    <!-- Other links here, uncomment as needed -->
-                    <!-- <li><a href="<%= request.getContextPath() %>/rooms" class="nav-link" onclick="closeMenu()">Rooms</a></li> -->
-                    <!-- <li><a href="<%= request.getContextPath() %>/about" class="nav-link" onclick="closeMenu()">About Us</a></li> -->
-                    <!-- <li><a href="<%= request.getContextPath() %>/contact" class="nav-link" onclick="closeMenu()">Contact Us</a></li> -->
+                  
                     <li><a href="Login.jsp" class="nav-link btn-primary" onclick="closeMenu()">Login</a></li>
                 </ul>
             </nav>
