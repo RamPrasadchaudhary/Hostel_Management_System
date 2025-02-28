@@ -59,6 +59,15 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
 </servlet-mapping>
+<servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>servlet.UserServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/UserServlet</url-pattern>
+</servlet-mapping>
 
 </web-app>
 </element>  
