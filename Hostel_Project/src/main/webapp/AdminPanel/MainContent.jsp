@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="MainContent.css"> <!-- Link to CSS -->
+    <link rel="stylesheet" href="Style/MainContent.css"> <!-- Link to CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="Heading.css"> <!-- Link to CSS -->
     

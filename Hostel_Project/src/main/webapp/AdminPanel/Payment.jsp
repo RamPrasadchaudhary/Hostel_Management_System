@@ -8,7 +8,7 @@
     <title>Manage Payments</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="Payment.css">
+    <link rel="stylesheet" href="Style/Payment.css">
        <link rel="stylesheet" href="Heading.css">
 </head>
 <body>

@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
             }
 
             PreparedStatement stmt = conn.prepareStatement(
-                "SELECT * FROM login WHERE role = ? AND username = ? AND password = ?"
+                "SELECT * FROM user WHERE role = ? AND username = ? AND password = ?"
             );
             stmt.setString(1, role);
             stmt.setString(2, username);
@@ -52,8 +52,8 @@ public class LoginServlet extends HttpServlet {
             if (rs.next()) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("username", username);
-                session.setAttribute("role", role);
-                session.setMaxInactiveInterval(30 * 60); // 30 minutes timeout
+            
+                session.setMaxInactiveInterval(100 * 60); // 30 minutes timeout
 
                 // Redirect based on role
                 switch (role.toLowerCase()) {

@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-   <%@ include file="Header.jsp" %>
+<%@ include file="Header.jsp" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,19 +11,53 @@
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
     <link rel="stylesheet" href="complaints.css">
+     <style>
+        .alert {
+         	
+            padding:2px;
+            width: 100%;
+            background-color: #e7f3fe;
+            color: #31708f;
+            border: 1px solid #bce8f1;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    
+   <section id="complaints">
+    <h2>Create a Complaint</h2>
+    <%
+        // Retrieve the message from the request parameters
+        String msg = request.getParameter("msg");
+        if (msg != null && !msg.isEmpty()) {
+    %>
+    <div class="alert" id="msgAlert">
+        <p><%= msg %></p>
+    </div>
+    <script>
+        // Hide the message after 5 seconds (5000 milliseconds)
+        setTimeout(function () {
+            var alertBox = document.getElementById("msgAlert");
+            if (alertBox) {
+                alertBox.style.display = "none";
+            }
+        }, 5000);
+    </script>
+    <%
+        }
+    %>
 
-    <section id="complaints">
-        <h2>Create a Complaint</h2>
-        <form id="complaint-form" method="POST" action="submitComplaint.jsp">
+        <!-- Note: The action attribute now points to the servlet -->
+ <form id="complaint-form" method="POST" action="${pageContext.request.contextPath}/SubmitComplaintServlet">
             <label for="complaint-type">Type of Complaint:</label>
             <select id="complaint-type" name="complaint-type" required>
-                <option value="maintenance">Maintenance</option>
-                <option value="room-cleaning">Room Cleaning</option>
-                <option value="food-quality">Food Quality</option>
-                <option value="other">Other</option>
+                <option value="plumber">Plumber Complaints</option>
+                <option value="electrical">Electrician Complaints</option>
+                <option value="mess">Mess Complaints</option>
+                <option value="water">Water Complaints</option>
+                <option value="sanitary">Sanitary Complaints</option>
+                <option value="wifi">WiFi Complaints</option>
             </select>
             <label for="complaint-description">Description:</label>
             <textarea id="complaint-description" name="complaint-description" rows="5" required></textarea>
@@ -68,6 +104,14 @@
     </div>
 
     <!-- Link to external JavaScript file -->
-    <script src="./Components/Scripting/complaints.js"></script>
+ <script>
+        // Hide the message after 5 seconds (5000 milliseconds)
+        setTimeout(function () {
+            var alertBox = document.getElementById("msgAlert");
+            if (alertBox) {
+                alertBox.style.display = "none";
+            }
+        }, 5000);
+    </script>
 </body>
 </html>

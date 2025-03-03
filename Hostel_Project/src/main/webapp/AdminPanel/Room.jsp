@@ -8,7 +8,7 @@
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <title>Room Management</title>
-	<link rel="stylesheet" href="room.css">
+	<link rel="stylesheet" href="Style/room.css">
 
 	    <link rel="stylesheet" href="Heading.css">
 	  <script>
@@ -54,10 +54,12 @@
 	   
 	  </div>
 	  <div class="main-content">
-	   <button onclick="openAddRoomModal()">Add Room</button>
+	   <button onclick="openAddRoomModal()" style="display: block; margin: 0 auto;">Add Room</button>
+
 	    <!-- Room Allocation Table -->
 	    <div class="container">
 	      <h3>Room Allocation</h3>
+	      <div class="table-container">
 	      <table border="1">
 	        <thead>
 	          <tr>
@@ -176,11 +178,13 @@
 	          %>
 	        </tbody>
 	      </table>
+	      </div>
 	    </div>
 	    
 	    <!-- Student List Table -->
 	    <div class="container ">
 	      <h3>Student List</h3>
+	      <div class="table-container">
 	      <table border="1">
 	        <thead>
 	          <tr>

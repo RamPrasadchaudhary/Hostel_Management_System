@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>Student Management System</title>  
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="Student.css">
+    <link rel="stylesheet" href="Style/Student.css">
     <link rel="stylesheet" href="Heading.css">
 </head>
 <body>
@@ -65,12 +65,6 @@
                     <label>Name:</label>
                     <input type="text" name="name" required value="<%= request.getParameter("name") != null ? request.getParameter("name") : "" %>">
                 </div>
-
-                <div class="student-form-group">
-                    <label>Room No:</label>
-                    <input type="text" name="roomNo" required value="<%= request.getParameter("roomNo") != null ? request.getParameter("roomNo") : "" %>">
-                </div>
-
                 <div class="student-form-group">
                     <label>Branch:</label>
                     <select name="branch">
@@ -95,7 +89,14 @@
                     <label>Address:</label>
                     <input type="text" name="address" required value="<%= request.getParameter("address") != null ? request.getParameter("address") : "" %>">
                 </div>
-
+				    <div class="student-form-group">
+                    <label>Parent Name:</label>
+                    <input type="text" name="parentName" required value="<%= request.getParameter("parentName") != null ? request.getParameter("parentName") : "" %>">
+                </div>
+                    <div class="student-form-group">
+                    <label>email:</label>
+                    <input type="email" name="email" required value="<%= request.getParameter("email") != null ? request.getParameter("email") : "" %>">
+                </div>
                 <div class="student-form-actions">
                     <button type="submit" class="student-submit-btn">
                         <%= request.getParameter("id") != null ? "Update Student" : "Add Student" %>
@@ -112,11 +113,12 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Room No.</th>
                 <th>Branch</th>
                 <th>Contact</th>
                 <th>Admission Date</th>
                 <th>Address</th>
+                <th>Parent Name:</th>
+                <th>Email</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -160,14 +162,16 @@
             <tr>
                 <td><%= rs.getInt("id") %></td>
                 <td><%= rs.getString("name") %></td>
-                <td><%= rs.getString("roomNo") %></td>
+                
                 <td><%= rs.getString("branch") %></td>
                   
                 <td><%= rs.getString("contact") %></td>
                 <td><%= rs.getString("admissionDate") %></td>
                 <td><%= rs.getString("address") %></td>
+                 <td><%= rs.getString("parentName") %></td>
+                <td><%= rs.getString("email") %></td>
                 <td class="student-action-buttons">
-                    <a href="?id=<%= rs.getInt("id") %>&name=<%= rs.getString("name") %>&roomNo=<%= rs.getString("roomNo") %>&branch=<%= rs.getString("branch") %>&contact=<%= rs.getString("contact") %>&admissionDate=<%= rs.getString("admissionDate") %>&address=<%= rs.getString("address") %>" class="student-edit-link">Edit</a>
+                    <a href="?id=<%= rs.getInt("id") %>&name=<%= rs.getString("name") %>&branch=<%= rs.getString("branch") %>&contact=<%= rs.getString("contact") %>&admissionDate=<%= rs.getString("admissionDate") %>&address=<%= rs.getString("address") %>&parentName=<%= rs.getString("parentName") %>&email=<%= rs.getString("email") %>" class="student-edit-link">Edit</a>
                     <a href="AllActionJSP/StudentAction.jsp?action=delete&id=<%= rs.getInt("id") %>" class="student-delete-link" onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
                 </td>
             </tr>
