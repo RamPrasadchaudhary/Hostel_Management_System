@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Connection;
@@ -74,10 +72,10 @@ public class SubmitComplaintServlet extends HttpServlet {
             rs.close();
             stmt.close();
             
-         
+            // 3. Insert the complaint record into the database
             String insertQuery = "INSERT INTO complaints " +
-                    "(student_id, name, contact, room_number, complaint_type, complaint_description, date_submitted) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, NOW())";
+                    "(student_id, name, contact, room_number, complaint_type, complaint_description, status ,date_submitted) " +
+                    "VALUES (?, ?, ?, ?, ?, ?,?, NOW())";
             stmt = conn.prepareStatement(insertQuery);
             stmt.setInt(1, studentId);
             stmt.setString(2, studentName);
@@ -85,6 +83,7 @@ public class SubmitComplaintServlet extends HttpServlet {
             stmt.setString(4, roomNumber);
             stmt.setString(5, complaintType);
             stmt.setString(6, complaintDescription);
+            stmt.setString(7, "In Process");
             
             int rowsInserted = stmt.executeUpdate();
             stmt.close();
@@ -96,7 +95,7 @@ public class SubmitComplaintServlet extends HttpServlet {
             } else {
                 msg = URLEncoder.encode("Failed to submit complaint. Please try again.", "UTF-8");
             }
-            // Use the context path for redirecting to complaints.jsp
+            // Redirect to complaints.jsp with a message
             response.sendRedirect(request.getContextPath() + "/StudentPanel/complaints.jsp?msg=" + msg);
             
         } catch (SQLException e) {

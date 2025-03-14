@@ -54,7 +54,6 @@
 
         .navbar a:hover, .navbar a.active {
             background-color: #0056b3;
-            border-bottom: 4px solid white;
         }
 
         /* Responsive Design */
@@ -72,7 +71,7 @@
     </header>
     <nav>
         <ul class="navbar">
-            <li><a href="dashboard.jsp" class="active">Dashboard</a></li>
+            <li><a href="dashboard.jsp" >Dashboard</a></li>
             <li><a href="payments.jsp">Payments</a></li>
             <li><a href="complaints.jsp">Complaints</a></li>
         </ul>
