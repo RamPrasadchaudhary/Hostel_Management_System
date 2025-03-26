@@ -54,11 +54,12 @@
 	   
 	  </div>
 	  <div class="main-content">
-	   <button onclick="openAddRoomModal()" style="display: block; margin: 0 auto;">Add Room</button>
+	   
 
 	    <!-- Room Allocation Table -->
 	    <div class="container">
-	      <h3>Room Allocation</h3>
+	    <button onclick="openAddRoomModal()" style="display: block; margin: 0 auto;">Add Room</button>
+	           <h2 style="padding:10px 10px;text-align:center; color:blue;"> Allocate the room to student</h2>
 	      <div class="table-container">
 	      <table border="1">
 	        <thead>
@@ -183,7 +184,7 @@
 	    
 	    <!-- Student List Table -->
 	    <div class="container ">
-	      <h3>Student List</h3>
+	      <h2 style="padding-bottom:10px;text-align:center; color:blue;">Room Allocated Student List</h2>
 	      <div class="table-container">
 	      <table border="1">
 	        <thead>
@@ -240,7 +241,7 @@
 	  </div>
 	  
 	  <!-- Single Modal Form for Allocation and Update -->
-	  <div id="allocateModal" class="modal" style="display:none;">
+	  <div id="allocateModal" class="modal" style="display:none">
 	    <div class="modal-content">
 	      <h3 id="modalTitle">Allocate Room</h3>
 	      <form action="AllActionJSP/RoomAction.jsp" method="post">

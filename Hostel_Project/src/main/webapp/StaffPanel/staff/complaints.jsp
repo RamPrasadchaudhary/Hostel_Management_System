@@ -5,17 +5,17 @@
 %>
 
 <section id="complaints-by-date">
-    <div class="section date-selector">
+    <div class="section date-selector search-bar">
         <h2><i class="fa-solid fa-calendar-day"></i><span class="shiny-text">Select Date</span></h2>
-        <form id="date-form">
-            <label for="date">Choose a date:</label>
-            <input type="date" id="date" name="date">
+        <form id="date-form" style="display:inline;gap:10%;justfy-content:center;">
+            <label for="date">Choose a date:</label><br>
+            <input type="date" id="date" style="width:70%;" name="date">
             <button type="button" id="search-date-btn">View Complaints</button>
             <button type="button" id="reset-date-btn">Reset</button>
         </form>
     </div>
 
-    <div class="section search-bar">
+    <div class="section search-bar ">
         <h2><i class="fa-solid fa-search"></i><span class="shiny-text">Search by ID</span></h2>
         <div id="search-area">
             <label for="search-id">Complaint ID:</label>

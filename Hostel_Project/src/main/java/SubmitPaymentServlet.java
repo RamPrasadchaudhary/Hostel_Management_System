@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import database.DatabaseConnection; // Helper class for DB connection
+import database.DatabaseConnection; // Ensure this class has a getConnection() method
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,11 +28,9 @@ public class SubmitPaymentServlet extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        // Set encoding and content type
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        // Get form values
         String contactInput = request.getParameter("contact");
         String paymentDetails = request.getParameter("payment_details");
         String month = request.getParameter("month");
@@ -49,7 +47,7 @@ public class SubmitPaymentServlet extends HttpServlet {
         try {
             conn = DatabaseConnection.getConnection();
 
-            // Retrieve student details using contact number
+            // Get student details
             String studentQuery = "SELECT id, name, email FROM students WHERE contact = ?";
             stmt = conn.prepareStatement(studentQuery);
             stmt.setString(1, contactInput);
@@ -62,7 +60,7 @@ public class SubmitPaymentServlet extends HttpServlet {
             rs.close();
             stmt.close();
 
-            // Retrieve room number
+            // Get room number
             String allocationQuery = "SELECT room_number FROM allocations WHERE student_id = ?";
             stmt = conn.prepareStatement(allocationQuery);
             stmt.setInt(1, studentId);
@@ -73,31 +71,24 @@ public class SubmitPaymentServlet extends HttpServlet {
             rs.close();
             stmt.close();
 
-            // File Upload Processing
+            // Handle file upload
             Part filePart = request.getPart("payment_receipt");
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-
-            // Set upload directory inside the project
             String applicationPath = request.getServletContext().getRealPath(""); 
             String uploadDir = applicationPath + File.separator + "uploads";
 
-            // Ensure the directory exists
             File fileUploadDir = new File(uploadDir);
             if (!fileUploadDir.exists()) {
                 fileUploadDir.mkdirs();
             }
 
-            // Save uploaded file
             String filePath = uploadDir + File.separator + fileName;
             filePart.write(filePath);
-
-            // Relative path for database storage
             String dbFilePath = "uploads/" + fileName;
 
-            // Insert payment record into database
-            String insertQuery = "INSERT INTO student_payments " +
-                "(student_id, student_name, contact, payment_details, month, email, room_number, status, receipt_file, payment_date) " +
-                "VALUES (?, ?, ?, ?,?, ?, ?, ?, ?, NOW())";
+            // Insert into database
+            String insertQuery = "INSERT INTO student_payments (student_id, student_name, contact, payment_details, month, email, room_number, status, receipt_file, payment_date) " +
+                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
             stmt = conn.prepareStatement(insertQuery);
             stmt.setInt(1, studentId);
             stmt.setString(2, studentName);
@@ -108,14 +99,14 @@ public class SubmitPaymentServlet extends HttpServlet {
             stmt.setString(7, roomNumber);
             stmt.setString(8, "Pending");
             stmt.setString(9, dbFilePath);
-
             int rowsInserted = stmt.executeUpdate();
             stmt.close();
 
-            // Set session attribute and redirect
+            // Set session contact
             HttpSession session = request.getSession();
             session.setAttribute("contact", contactInput);
-            String msg = (rowsInserted > 0) ? "Payment submitted successfully" : "Failed to submit payment. Please try again.";
+
+            String msg = (rowsInserted > 0) ? "Payment submitted successfully" : "Failed to submit payment.";
             response.sendRedirect(request.getContextPath() + "/StudentPanel/payments.jsp?msg=" + URLEncoder.encode(msg, "UTF-8"));
 
         } catch (SQLException e) {

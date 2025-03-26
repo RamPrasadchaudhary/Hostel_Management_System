@@ -1,21 +1,22 @@
+
 <%@include file="../templates/header.jsp"%>
 <%
-    request.setAttribute("title", "Staff Dashboard");
-    request.setAttribute("active", "dashboard");
-%>
-  <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setHeader("Expires", "0");
 
-    if (session.getAttribute("username") == null || session.getAttribute("role") == null) {
-        response.sendRedirect("Login.jsp");
+    // Ensure user is logged in
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect(request.getContextPath() + "/Login.jsp");
         return;
     }
 %>
 <section id="dashboard">
     <div class="section staff-summary">
-        <a href="${pageContext.request.contextPath}/LogoutServlet" class="logout-btn">Logout</a>
+	  <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
+    <input type="submit" class="logout-btn" value="Logout">
+</form>
+
         <h2><i class="fa-solid fa-user"></i><span class="shiny-text">Staff Profile</span></h2>
         <div class="profile-pic">
             <img src="${pageContext.request.contextPath}/assets/img/ux.jpeg" alt="Electrician Picture">

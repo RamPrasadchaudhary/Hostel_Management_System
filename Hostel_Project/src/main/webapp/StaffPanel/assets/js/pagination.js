@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
     const prevButton = document.getElementById('prev-page');
     const nextButton = document.getElementById('next-page');
     const pageNumberInput = document.getElementById('page-number');
@@ -32,4 +32,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     updatePagination();
-});
+});*/
