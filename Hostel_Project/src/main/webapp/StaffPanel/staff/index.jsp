@@ -97,3 +97,5 @@
 </section>
 
 <%@include file="../templates/footer.jsp"%>
+
+# staff dashboard template with its complaint file and details file
