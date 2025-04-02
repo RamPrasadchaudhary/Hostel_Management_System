@@ -69,3 +69,4 @@
 
 </body>
 </html>
+# Admin panel main content page dashboard
