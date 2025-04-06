@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title</title>
+    <title>LandingPage</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/Style/layout.css">
 </head>
 <body>

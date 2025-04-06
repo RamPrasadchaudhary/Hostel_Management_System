@@ -63,7 +63,8 @@
     <section id="edit-profile">
         <div class="section">
             <h2>Edit Profile</h2>
-            <form id="profile-form" action="" method="POST">
+ <!-- Updated form action with context path -->
+        <form id="profile-form" action="" method="POST">
                 
                 <div class="form-group">
                     <label for="name">Name</label>

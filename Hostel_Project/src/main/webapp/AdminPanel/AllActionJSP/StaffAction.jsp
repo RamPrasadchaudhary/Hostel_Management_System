@@ -1,6 +1,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="database.DatabaseConnection" %>
 <%
+response.setIntHeader("Refresh", 5);
     Connection con = null;
     PreparedStatement pst = null;
     String message = "";

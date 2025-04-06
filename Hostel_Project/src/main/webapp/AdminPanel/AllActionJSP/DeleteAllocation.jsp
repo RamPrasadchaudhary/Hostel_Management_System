@@ -2,6 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="database.DatabaseConnection" %>
 <%
+response.setIntHeader("Refresh", 5);
     String studentId = request.getParameter("studentId");
     try {
         Connection con = DatabaseConnection.getConnection();

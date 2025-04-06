@@ -24,7 +24,7 @@ public class MainController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the "page" parameter from the request
-       s
+    	 response.setIntHeader("Refresh", 5);
     }
 
     /**

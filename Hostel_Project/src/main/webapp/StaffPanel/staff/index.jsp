@@ -1,30 +1,106 @@
-
 <%@include file="../templates/header.jsp"%>
+<%@page import="database.DatabaseConnection, java.sql.*, java.util.List, java.util.ArrayList" %>
+
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setHeader("Expires", "0");
 
-    // Ensure user is logged in
-    if (session.getAttribute("username") == null) {
+    String username = (String) session.getAttribute("username");
+    if (username == null) {
         response.sendRedirect(request.getContextPath() + "/Login.jsp");
         return;
     }
-%>
-<section id="dashboard">
-    <div class="section staff-summary">
-	  <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
-    <input type="submit" class="logout-btn" value="Logout">
-</form>
 
-        <h2><i class="fa-solid fa-user"></i><span class="shiny-text">Staff Profile</span></h2>
+    // Profile variables
+    String name = "N/A";
+    String position = "Warden";
+    String email = "N/A";
+    String address = "N/A";
+    String phone = "N/A";
+    String salary = "N/A";
+
+    // Complaint summary variables
+    int resolvedCount = 0, pendingCount = 0, progressCount = 0, totalCount = 0;
+    List<String[]> recentComplaints = new ArrayList<>();
+
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    try {
+        conn = DatabaseConnection.getConnection();
+
+        // Get Warden Profile
+        String sql = "SELECT name, contact, phone, address, salary FROM wardens WHERE phone = ?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, username);
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            name = rs.getString("name");
+            email = rs.getString("contact");
+            phone = rs.getString("phone");
+            address = rs.getString("address");
+            salary = rs.getString("salary");
+        }
+        rs.close();
+        pstmt.close();
+
+        // Get Complaint Summary
+        String summarySql = "SELECT status, COUNT(*) as count FROM complaints GROUP BY status";
+        pstmt = conn.prepareStatement(summarySql);
+        rs = pstmt.executeQuery();
+        while (rs.next()) {
+            String status = rs.getString("status");
+            int count = rs.getInt("count");
+            totalCount += count;
+            if ("Resolved".equalsIgnoreCase(status)) resolvedCount = count;
+            else if ("Pending".equalsIgnoreCase(status)) pendingCount = count;
+            else if ("In Progress".equalsIgnoreCase(status)) progressCount = count;
+        }
+        rs.close();
+        pstmt.close();
+
+        // Get Recent Complaints (limit 3)
+        String recentSql = "SELECT complaint_id, room, status, date, time FROM complaints ORDER BY date DESC, time DESC LIMIT 3";
+        pstmt = conn.prepareStatement(recentSql);
+        rs = pstmt.executeQuery();
+        while (rs.next()) {
+            String[] complaint = new String[5];
+            complaint[0] = rs.getString("complaint_id");
+            complaint[1] = rs.getString("room");
+            complaint[2] = rs.getString("status");
+            complaint[3] = rs.getString("date");
+            complaint[4] = rs.getString("time");
+            recentComplaints.add(complaint);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (rs != null) try { rs.close(); } catch (SQLException e) {}
+        if (pstmt != null) try { pstmt.close(); } catch (SQLException e) {}
+        if (conn != null) try { conn.close(); } catch (SQLException e) {}
+    }
+%>
+
+<section id="dashboard">
+    <div class="section warden-summary">
+        <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
+            <input type="submit" class="logout-btn" value="Logout">
+        </form>
+
+        <h2><i class="fa-solid fa-user"></i><span class="shiny-text">Warden Profile</span></h2>
         <div class="profile-pic">
-            <img src="${pageContext.request.contextPath}/assets/img/ux.jpeg" alt="Electrician Picture">
+            <img src="../assets/img/ux.jpg" alt="Warden Picture">
         </div>
-        <p><strong>Name:</strong> Rahul Bhurtel</p>
-        <p><strong>Position:</strong> Student</p>
-        <p><strong>Email:</strong> bhurtel@hostel.com</p>
-        <p><strong>Phone Number:</strong> 9876543210</p>
+        <div style="align-items:left">
+            <p><strong>Name:</strong> <%= name %></p>
+            <p><strong>Position:</strong> <%= position %></p>
+            <p><strong>Email:</strong> <%= email %></p>
+            <p><strong>Phone Number:</strong> <%= phone %></p>
+            <p><strong>Address:</strong> <%= address %></p>
+            <p><strong>Salary:</strong> <%= salary %></p>
+        </div>
     </div>
 
     <div class="section complaint-summary">
@@ -39,19 +115,19 @@
             <tbody>
                 <tr>
                     <td>Resolved</td>
-                    <td class="status-resolved">30</td>
+                    <td class="status-resolved"><%= resolvedCount %></td>
                 </tr>
                 <tr>
                     <td>In Progress</td>
-                    <td class="status-in-progress">10</td>
+                    <td class="status-in-progress"><%= progressCount %></td>
                 </tr>
                 <tr>
                     <td>Pending</td>
-                    <td class="status-pending">10</td>
+                    <td class="status-pending"><%= pendingCount %></td>
                 </tr>
                 <tr>
                     <td>Total Complaints</td>
-                    <td>50</td>
+                    <td><%= totalCount %></td>
                 </tr>
             </tbody>
         </table>
@@ -70,27 +146,21 @@
                 </tr>
             </thead>
             <tbody>
+                <%
+                    for (String[] c : recentComplaints) {
+                        String statusClass = "";
+                        if ("Resolved".equalsIgnoreCase(c[2])) statusClass = "status-resolved";
+                        else if ("Pending".equalsIgnoreCase(c[2])) statusClass = "status-pending";
+                        else if ("In Progress".equalsIgnoreCase(c[2])) statusClass = "status-in-progress";
+                %>
                 <tr>
-                    <td>101</td>
-                    <td>Room 304</td>
-                    <td class="status-in-progress">In Progress</td>
-                    <td>2024-08-25</td>
-                    <td>10:30 AM</td>
+                    <td><%= c[0] %></td>
+                    <td><%= c[1] %></td>
+                    <td class="<%= statusClass %>"><%= c[2] %></td>
+                    <td><%= c[3] %></td>
+                    <td><%= c[4] %></td>
                 </tr>
-                <tr>
-                    <td>102</td>
-                    <td>Room 516</td>
-                    <td class="status-pending">Pending</td>
-                    <td>2024-08-24</td>
-                    <td>12:45 PM</td>
-                </tr>
-                <tr>
-                    <td>103</td>
-                    <td>Room 210</td>
-                    <td class="status-resolved">Resolved</td>
-                    <td>2024-08-23</td>
-                    <td>02:00 PM</td>
-                </tr>
+                <% } %>
             </tbody>
         </table>
     </div>

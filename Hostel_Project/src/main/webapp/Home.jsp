@@ -132,7 +132,7 @@
 				        String[][] carouselImages = {
 				            {"image3.png", "Comfortable Rooms for a Relaxing Stay"},
 				            {"image2.png", "Enjoy Delicious and Nutritious Meals"},
-				            {"Hostel.png", "A Friendly Community You'll Love"}
+				            {"hostel.jpg", "A Friendly Community You'll Love"}
 				        };
 				        for (int i = 0; i < carouselImages.length; i++) {
 				    %>
@@ -161,7 +161,7 @@
                 <button class="btn-secondary">Learn More</button>
             </div>
             <div class="about-image">
-                <img src="Image/Hostel.png" alt="About Munnu Hostel" />
+                <img src="Image/hostel.jpg" alt="About Munnu Hostel" />
             </div>
         </section>
 
@@ -170,17 +170,17 @@
             <h2>Our Amenities</h2>
             <div class="features-cards">
                 <div class="feature-card">
-                    <img src="Wifi.png" alt="Free WiFi" />
+                    <img src="Image/Wifi.png" alt="Free WiFi" />
                     <h3>Free WiFi</h3>
                     <p>Stay connected with high-speed internet throughout the hostel.</p>
                 </div>
                 <div class="feature-card">
-                    <img src="Food.png" alt="Delicious Meals" />
+                    <img src="Image/Food.png" alt="Delicious Meals" />
                     <h3>Delicious Meals</h3>
                     <p>Enjoy freshly prepared, nutritious meals daily.</p>
                 </div>
                 <div class="feature-card">
-                    <img src="Security.png" alt="24/7 Security" />
+                    <img src="Image/Security.png" alt="24/7 Security" />
                     <h3>24/7 Security</h3>
                     <p>Your safety is our top priority, with round-the-clock security.</p>
                 </div>

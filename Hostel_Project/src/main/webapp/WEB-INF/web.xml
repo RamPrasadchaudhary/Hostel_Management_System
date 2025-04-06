@@ -68,6 +68,15 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/UserServlet</url-pattern>
 </servlet-mapping>
+<servlet>
+    <servlet-name>EditProfileServlet</servlet-name>
+    <servlet-class>your.package.name.EditProfileServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>EditProfileServlet</servlet-name>
+    <url-pattern>/EditProfileServlet</url-pattern>
+</servlet-mapping>
 
 </web-app>
 </element>  

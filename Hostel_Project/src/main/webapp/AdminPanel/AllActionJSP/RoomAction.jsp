@@ -2,6 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="database.DatabaseConnection" %>
 <%
+response.setIntHeader("Refresh", 5);
   String mode = request.getParameter("mode");
   String roomNumber = request.getParameter("roomNumber");
   String allocationDate = request.getParameter("allocationDate");

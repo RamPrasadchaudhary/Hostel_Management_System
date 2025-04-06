@@ -1,27 +1,137 @@
-<%@include file="../templates/header.jsp"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="database.DatabaseConnection" %>
+<%@ include file="../templates/header.jsp" %>
+
 <%
     request.setAttribute("title", "Complaints List");
     request.setAttribute("active", "complaints");
+
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    String searchId = request.getParameter("search-id");
+    String searchDate = request.getParameter("date");
+
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        conn = DatabaseConnection.getConnection();
+
+        String sql = "SELECT id, student_id, name, contact, room_number, complaint_type, complaint_description, status, date_submitted FROM complaints";
+        boolean hasCondition = false;
+
+        if ((searchId != null && !searchId.trim().isEmpty()) || (searchDate != null && !searchDate.trim().isEmpty())) {
+            sql += " WHERE ";
+            if (searchId != null && !searchId.trim().isEmpty()) {
+                sql += "id = ?";
+                hasCondition = true;
+            }
+            if (searchDate != null && !searchDate.trim().isEmpty()) {
+                if (hasCondition) sql += " AND ";
+                sql += "DATE(date_submitted) = ?";
+            }
+        }
+
+        ps = conn.prepareStatement(sql);
+
+        int index = 1;
+        if (searchId != null && !searchId.trim().isEmpty()) {
+            ps.setInt(index++, Integer.parseInt(searchId));
+        }
+        if (searchDate != null && !searchDate.trim().isEmpty()) {
+            ps.setDate(index++, java.sql.Date.valueOf(searchDate));
+        }
+
+        rs = ps.executeQuery();
 %>
 
-<section id="complaints-by-date">
-    <div class="section date-selector search-bar">
-        <h2><i class="fa-solid fa-calendar-day"></i><span class="shiny-text">Select Date</span></h2>
-        <form id="date-form" style="display:inline;gap:10%;justfy-content:center;">
-            <label for="date">Choose a date:</label><br>
-            <input type="date" id="date" style="width:70%;" name="date">
-            <button type="button" id="search-date-btn">View Complaints</button>
-            <button type="button" id="reset-date-btn">Reset</button>
-        </form>
-    </div>
+<style>
+    .search-section {
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+    }
 
-    <div class="section search-bar ">
-        <h2><i class="fa-solid fa-search"></i><span class="shiny-text">Search by ID</span></h2>
-        <div id="search-area">
-            <label for="search-id">Complaint ID:</label>
-            <input type="number" id="search-id" name="search-id" placeholder="Enter Complaint ID" min="0">
-            <button id="search-btn">Search</button>
-            <button id="reset-btn">Reset</button>
+    .search-box {
+        flex: 1 1 300px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: white;
+    }
+
+    .search-box label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #aaa;
+        margin-bottom: 10px;
+    }
+
+    .search-box button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #337ab7;
+        color: white;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .search-box button:hover {
+        background-color: #23527c;
+    }
+
+    .complaints-table th, .complaints-table td {
+        text-align: center;
+    }
+
+    .details-btn {
+        background: #5cb85c;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .details-btn:hover {
+        background-color: #449d44;
+    }
+</style>
+
+<section id="complaints-by-date">
+    <div class="section search-bar">
+        <h2><i class="fa-solid fa-filter"></i> <span class="shiny-text">Search Complaints</span></h2>
+        <div class="search-section">
+
+            <!-- Complaint ID Search -->
+            <form class="search-box" method="get" action="complaints.jsp">
+                <label for="search-id">Search by Complaint ID:</label>
+                <input type="number" id="search-id" name="search-id" placeholder="Enter Complaint ID" value="<%= searchId != null ? searchId : "" %>">
+                <button type="submit">Search</button>
+                <a href="complaints.jsp"><button type="button">Reset</button></a>
+            </form>
+            <h3>OR</h3>
+
+            <!-- Date Search -->
+            <form class="search-box" method="get" action="complaints.jsp">
+                <label for="date">Search by Date:</label>
+                <input type="date" id="date" name="date" value="<%= searchDate != null ? searchDate : "" %>">
+                <button type="submit">Search</button>
+                <a href="complaints.jsp"><button type="button">Reset</button></a>
+            </form>
+
         </div>
     </div>
 
@@ -30,48 +140,59 @@
         <table class="complaints-table">
             <thead>
                 <tr>
-                    <th>Complaint ID</th>
-                    <th>Room</th>
+                    <th>Complaint Id</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Room Number</th>
+                    <th>Complaint Type</th>
+                    <th>Complaint Description</th>
                     <th>Status</th>
-                    <th>Date</th>
-                    <th>Time</th>
+                    <th>Date Submitted</th>
                     <th>Details</th>
                 </tr>
             </thead>
             <tbody>
+                <%
+                    boolean found = false;
+                    while(rs.next()) {
+                        found = true;
+                %>
                 <tr>
-                    <td>201</td>
-                    <td>Room 101</td>
-                    <td class="status-pending">Pending</td>
-                    <td>2024-08-26</td>
-                    <td>09:30 AM</td>
-                    <td><a href="details.jsp?complaintId=201" class="details-btn">View Details</a></td>
+                    <td><%= rs.getInt("id") %></td>
+                    <td><%= rs.getString("student_id") %></td>
+                    <td><%= rs.getString("name") %></td>
+                    <td><%= rs.getString("contact") %></td>
+                    <td><%= rs.getString("room_number") %></td>
+                    <td><%= rs.getString("complaint_type") %></td>
+                    <td><%= rs.getString("complaint_description") %></td>
+                    <td><%= rs.getString("status") %></td>
+                    <td><%= rs.getDate("date_submitted") %></td>
+                    <td><a href="details.jsp?complaintId=<%= rs.getString("student_id") %>" class="details-btn">View Details</a></td>
                 </tr>
+                <%
+                    }
+                    if (!found) {
+                %>
                 <tr>
-                    <td>202</td>
-                    <td>Room 102</td>
-                    <td class="status-resolved">Resolved</td>
-                    <td>2024-08-25</td>
-                    <td>11:00 AM</td>
-                    <td><a href="details.jsp?complaintId=202" class="details-btn">View Details</a></td>
+                    <td colspan="10" style="text-align:center;">No complaints found for the given criteria.</td>
                 </tr>
-                <tr>
-                    <td>203</td>
-                    <td>Room 103</td>
-                    <td class="status-in-progress">In Progress</td>
-                    <td>2024-08-24</td>
-                    <td>02:15 PM</td>
-                    <td><a href="details.jsp?complaintId=203" class="details-btn">View Details</a></td>
-                </tr>
+                <%
+                    }
+                %>
             </tbody>
         </table>
     </div>
-
-    <div class="pagination">
-        <button id="prev-page">Previous</button>
-        <span>Page <input type="number" id="page-number" value="1" min="1" max="10"> of 10</span>
-        <button id="next-page">Next</button>
-    </div>
 </section>
 
-<%@include file="../templates/footer.jsp"%>
+<%
+    } catch(Exception e) {
+        out.println("Error: " + e.getMessage());
+    } finally {
+        if(rs != null) try { rs.close(); } catch(Exception e){}
+        if(ps != null) try { ps.close(); } catch(Exception e){}
+        if(conn != null) try { conn.close(); } catch(Exception e){}
+    }
+%>
+
+<%@ include file="../templates/footer.jsp" %>

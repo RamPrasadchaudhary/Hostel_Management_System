@@ -133,7 +133,7 @@
 
     <div class="container">
         <button onclick="toggleTable('studentsTable')">Show Students</button>
-        <button onclick="toggleTable('staffTable')">Show Staff</button>
+        <button onclick="toggleTable('staffTable')">Show Wardens</button>
         <button onclick="toggleTable('adminTable')">Show Admin</button>
         <div id="messagebox">
             <% 
@@ -221,10 +221,10 @@
                 <% 
                   try (Connection con = DatabaseConnection.getConnection();
                        Statement stmt = con.createStatement();
-                       ResultSet rs = stmt.executeQuery("SELECT s.id, s.name, s.contact, u.password FROM staff s LEFT JOIN user u ON s.id = u.user_id AND u.role='Staff'")) {
+                       ResultSet rs = stmt.executeQuery("SELECT w.id, w.name, w.phone, u.password FROM wardens w LEFT JOIN user u ON w.id = u.user_id AND u.role='Staff'")) {
                       while (rs.next()) {
                           int staffId = rs.getInt("id");
-                          String contact = rs.getString("contact");
+                          String contact = rs.getString("phone");
                           String password = rs.getString("password");
                 %>
                 <tr>
