@@ -25,6 +25,7 @@
         out.println("<p>Error retrieving payment records: " + e.getMessage() + "</p>");
     }
 %>
+//Backend portion complete
 <!DOCTYPE html>
 <html lang="en">
 <head>
