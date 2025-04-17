@@ -158,7 +158,8 @@
                     With spacious rooms, delicious meals, and friendly staff, we ensure
                     that your stay is unforgettable.
                 </p>
-                <button class="btn-secondary">Learn More</button>
+             <button class="btn-secondary" onclick="window.location.href='detailPage.jsp';">Learn More</button>
+
             </div>
             <div class="about-image">
                 <img src="Image/hostel.jpg" alt="About Munnu Hostel" />

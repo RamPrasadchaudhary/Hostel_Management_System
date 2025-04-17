@@ -1,156 +1,116 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="SideBar.jsp" %> <!-- Sidebar Included -->
+<%@ page import="java.sql.*, java.util.*" %>
+<%@ include file="SideBar.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Complaints</title>
+    <title>Complaint Records</title>
     <link rel="stylesheet" href="Style/complaints.css">
-      <link rel="stylesheet" href="Heading.css">
+    <link rel="stylesheet" href="Heading.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .complaint-details { display: none; }
+        .arrow-icon.rotate { transform: rotate(180deg); }
+    </style>
 </head>
 <body>
-    <!-- Main Content -->
-    <div class="heading-container">
-        <h3 class="heading-title">Complaints  Record</h3>
-        <p class="heading-subtitle">This is the complaints page</p>
-    </div>
-    <div class="main-content">
-          
+<div class="heading-container">
+    <h3 class="heading-title">Complaints Record</h3>
+    <p class="heading-subtitle">This is the complaints page</p>
+</div>
 
-        <!-- Complaint Categories -->
-        <div class="complaints-dashboard">
-            <!-- Electrician Box -->
-            <div class="complaint-box" id="electrician-box">
-                <div class="complaint-heading" onclick="toggleComplaints('electrician-box')">
-                    <h2>Electrician Complaints</h2>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
-                </div>
-                <div class="complaint-details">
-                    <div class="complaint">
-                        <p><strong>Complaint by:</strong> <span>John Doe</span></p>
-                        <p><strong>Date:</strong> <span>12th September 2024, Time: 10:00 AM</span></p>
-                        <p><strong>Student ID:</strong> <span>12345</span></p>
-                        <p><strong>Room Number:</strong> <span>101</span></p>
-                        <p><strong>Description:</strong> <span>The room's light is flickering intermittently, and the switch seems to be malfunctioning.</span></p>
-                        <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
-                        <button class="view-details-btn">View Details</button>
-                    </div>
-                </div>
+<div class="main-content">
+    <div class="complaints-dashboard">
+        <%
+            String[] complaintTypes = {"Electrician", "Mess", "WiFi", "Water", "Sanitary", "Plumber"};
+
+            // Map to hold categorized complaints
+            Map<String, List<Map<String, String>>> categorizedComplaints = new HashMap<>();
+
+            for (String type : complaintTypes) {
+                categorizedComplaints.put(type.toLowerCase(), new ArrayList<>());
+            }
+
+            Connection conn = null;
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hostelproject", "root", "9821574168");
+
+                String sql = "SELECT * FROM complaints ORDER BY date_submitted DESC";
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    String type = rs.getString("complaint_type").toLowerCase();
+                    if (categorizedComplaints.containsKey(type)) {
+                        Map<String, String> complaint = new HashMap<>();
+                        complaint.put("name", rs.getString("name"));
+                        complaint.put("date", rs.getTimestamp("date_submitted").toString());
+                        complaint.put("student_id", rs.getString("student_id"));
+                        complaint.put("room_number", rs.getString("room_number"));
+                        complaint.put("description", rs.getString("complaint_description"));
+                        complaint.put("status", rs.getString("status"));
+                        categorizedComplaints.get(type).add(complaint);
+                    }
+                }
+
+            } catch (Exception e) {
+                out.println("<p style='color:red;'>Error fetching complaints: " + e.getMessage() + "</p>");
+            } finally {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+                if (conn != null) conn.close();
+            }
+
+            for (String type : complaintTypes) {
+                String id = type.toLowerCase() + "-box";
+        %>
+        <div class="complaint-box" id="<%=id%>">
+            <div class="complaint-heading" onclick="toggleComplaints('<%=id%>')">
+                <h2><%=type%> Complaints</h2>
+                <i class="fas fa-chevron-down arrow-icon"></i>
             </div>
-
-            <!-- Mess Box -->
-            <div class="complaint-box" id="mess-box">
-                <div class="complaint-heading" onclick="toggleComplaints('mess-box')">
-                    <h2>Mess Complaints</h2>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
+            <div class="complaint-details">
+                <%
+                    List<Map<String, String>> complaints = categorizedComplaints.get(type.toLowerCase());
+                    if (complaints.isEmpty()) {
+                %>
+                <p>No complaints found.</p>
+                <% } else {
+                    for (Map<String, String> complaint : complaints) {
+                %>
+                <div class="complaint">
+                    <p><strong>Complaint by:</strong> <span><%=complaint.get("name")%></span></p>
+                    <p><strong>Date:</strong> <span><%=complaint.get("date")%></span></p>
+                    <p><strong>Student ID:</strong> <span><%=complaint.get("student_id")%></span></p>
+                    <p><strong>Room Number:</strong> <span><%=complaint.get("room_number")%></span></p>
+                    <p><strong>Description:</strong> <span><%=complaint.get("description")%></span></p>
+                    <p><strong>Status:</strong> <span class="status <%=complaint.get("status").toLowerCase()%>"><%=complaint.get("status")%></span></p>
+                    <button class="view-details-btn">View Details</button>
                 </div>
-                <div class="complaint-details">
-                    <div class="complaint">
-                        <p><strong>Complaint by:</strong> <span>Mark Smith</span></p>
-                        <p><strong>Date:</strong> <span>10th September 2024, Time: 9:30 AM</span></p>
-                        <p><strong>Student ID:</strong> <span>44556</span></p>
-                        <p><strong>Room Number:</strong> <span>404</span></p>
-                        <p><strong>Description:</strong> <span>The food served today was cold and undercooked.</span></p>
-                        <p><strong>Status:</strong> <span class="status in-progress">In Progress</span></p>
-                        <button class="view-details-btn">View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- WiFi Complaints -->
-            <div class="complaint-box" id="wifi-box">
-                <div class="complaint-heading" onclick="toggleComplaints('wifi-box')">
-                    <h2>WiFi Complaints</h2>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
-                </div>
-                <div class="complaint-details">
-                    <div class="complaint">
-                        <p><strong>Complaint by:</strong> <span>Sarah Lee</span></p>
-                        <p><strong>Date:</strong> <span>15th September 2024, Time: 11:45 AM</span></p>
-                        <p><strong>Student ID:</strong> <span>98765</span></p>
-                        <p><strong>Room Number:</strong> <span>202</span></p>
-                        <p><strong>Description:</strong> <span>The WiFi connection is unstable and keeps dropping.</span></p>
-                        <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
-                        <button class="view-details-btn">View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Water Complaints -->
-            <div class="complaint-box" id="water-box">
-                <div class="complaint-heading" onclick="toggleComplaints('water-box')">
-                    <h2>Water Complaints</h2>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
-                </div>
-                <div class="complaint-details">
-                    <div class="complaint">
-                        <p><strong>Complaint by:</strong> <span>Alice Cooper</span></p>
-                        <p><strong>Date:</strong> <span>18th September 2024, Time: 2:00 PM</span></p>
-                        <p><strong>Student ID:</strong> <span>11223</span></p>
-                        <p><strong>Room Number:</strong> <span>303</span></p>
-                        <p><strong>Description:</strong> <span>No hot water in the bathroom.</span></p>
-                        <p><strong>Status:</strong> <span class="status resolved">Resolved</span></p>
-                        <button class="view-details-btn">View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sanitary Complaints -->
-            <div class="complaint-box" id="sanitary-box">
-                <div class="complaint-heading" onclick="toggleComplaints('sanitary-box')">
-                    <h2>Sanitary Complaints</h2>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
-                </div>
-                <div class="complaint-details">
-                    <div class="complaint">
-                        <p><strong>Complaint by:</strong> <span>Jessica Brown</span></p>
-                        <p><strong>Date:</strong> <span>20th September 2024, Time: 1:30 PM</span></p>
-                        <p><strong>Student ID:</strong> <span>65432</span></p>
-                        <p><strong>Room Number:</strong> <span>404</span></p>
-                        <p><strong>Description:</strong> <span>The toilet flush is not working properly.</span></p>
-                        <p><strong>Status:</strong> <span class="status in-progress">In Progress</span></p>
-                        <button class="view-details-btn">View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Plumber Complaints -->
-            <div class="complaint-box" id="plumber-box">
-                <div class="complaint-heading" onclick="toggleComplaints('plumber-box')">
-                    <h2>Plumber Complaints</h2>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
-                </div>
-                <div class="complaint-details">
-                    <div class="complaint">
-                        <p><strong>Complaint by:</strong> <span>George King</span></p>
-                        <p><strong>Date:</strong> <span>22nd September 2024, Time: 4:00 PM</span></p>
-                        <p><strong>Student ID:</strong> <span>22110</span></p>
-                        <p><strong>Room Number:</strong> <span>102</span></p>
-                        <p><strong>Description:</strong> <span>The sink is leaking water.</span></p>
-                        <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
-                        <button class="view-details-btn">View Details</button>
-                    </div>
-                </div>
+                <% } } %>
             </div>
         </div>
+        <% } %>
     </div>
+</div>
 
-    <script>
-        function toggleComplaints(boxId) {
-            const box = document.getElementById(boxId);
-            const details = box.querySelector('.complaint-details');
-            const arrowIcon = box.querySelector('.arrow-icon');
-            
-            if (details.style.display === 'block') {
-                details.style.display = 'none';
-                arrowIcon.classList.remove('rotate');
-            } else {
-                details.style.display = 'block';
-                arrowIcon.classList.add('rotate');
-            }
+<script>
+    function toggleComplaints(boxId) {
+        const box = document.getElementById(boxId);
+        const details = box.querySelector('.complaint-details');
+        const arrowIcon = box.querySelector('.arrow-icon');
+        if (details.style.display === 'block') {
+            details.style.display = 'none';
+            arrowIcon.classList.remove('rotate');
+        } else {
+            details.style.display = 'block';
+            arrowIcon.classList.add('rotate');
         }
-    </script>
+    }
+</script>
 </body>
 </html>

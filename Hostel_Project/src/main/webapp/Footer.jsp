@@ -54,9 +54,9 @@
 
         <!-- Footer Bottom Section -->
         <div class="footer-bottom">
-            <p>&copy; 2023 Company Name. All rights reserved.</p>
+            <p>&copy; 2025 Munnu Hostel. All rights reserved.</p>
             <ul>
-                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="policy.jsp">Privacy Policy</a></li>
                 <li><a href="#">Cookies Policy</a></li>
             </ul>
         </div>

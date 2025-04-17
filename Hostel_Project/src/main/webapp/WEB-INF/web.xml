@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <element>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
+ <display-name>Hostel_Project</display-name>
+
+  <!-- Home Servlet -->
   <servlet>
-    <description></description>
-    <display-name>HomeServlet</display-name>
     <servlet-name>HomeServlet</servlet-name>
     <servlet-class>HomeServlet</servlet-class>
   </servlet>
@@ -11,7 +12,78 @@
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/HomeServlet</url-pattern>
   </servlet-mapping>
-  <display-name>Hostel_Project</display-name>
+
+  <!-- Main Controller -->
+  <servlet>
+    <servlet-name>MainController</servlet-name>
+    <servlet-class>MainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MainController</servlet-name>
+    <url-pattern>/MainController</url-pattern>
+  </servlet-mapping>
+
+  <!-- Login Servlet -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+
+  <!-- Student Servlet -->
+  <servlet>
+    <servlet-name>StudentServlet</servlet-name>
+    <servlet-class>servlet.StudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentServlet</servlet-name>
+    <url-pattern>/StudentServlet</url-pattern>
+  </servlet-mapping>
+
+  <!-- Logout Servlet -->
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+
+  <!-- User Servlet -->
+  <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/UserServlet</url-pattern>
+  </servlet-mapping>
+
+  <!-- Edit Profile Servlet -->
+  <servlet>
+    <servlet-name>EditProfileServlet</servlet-name>
+    <servlet-class>servlet.EditProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProfileServlet</servlet-name>
+    <url-pattern>/EditProfileServlet</url-pattern>
+  </servlet-mapping>
+
+  <!-- Admin Dashboard Servlet -->
+  <servlet>
+    <servlet-name>AdminDashboardServlet</servlet-name>
+    <servlet-class>servlet.AdminDashboardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminDashboardServlet</servlet-name>
+    <url-pattern>/AdminDashboardServlet</url-pattern>
+  </servlet-mapping>
+
+  <!-- Welcome Files -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -20,63 +92,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>MainController</display-name>
-    <servlet-name>MainController</servlet-name>
-    <servlet-class>MainController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MainController</servlet-name>
-    <url-pattern>/MainController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>StudentServlet</display-name>
-    <servlet-name>StudentServlet</servlet-name>
-    <servlet-class>servlet.StudentServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>StudentServlet</servlet-name>
-    <url-pattern>/StudentServlet</url-pattern>
-  </servlet-mapping>
-<servlet>
-    <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>servlets.LogoutServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/logout</url-pattern>
-</servlet-mapping>
-<servlet>
-    <servlet-name>UserServlet</servlet-name>
-    <servlet-class>servlet.UserServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>UserServlet</servlet-name>
-    <url-pattern>/UserServlet</url-pattern>
-</servlet-mapping>
-<servlet>
-    <servlet-name>EditProfileServlet</servlet-name>
-    <servlet-class>your.package.name.EditProfileServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>EditProfileServlet</servlet-name>
-    <url-pattern>/EditProfileServlet</url-pattern>
-</servlet-mapping>
 
 </web-app>
-</element>  
+</element>

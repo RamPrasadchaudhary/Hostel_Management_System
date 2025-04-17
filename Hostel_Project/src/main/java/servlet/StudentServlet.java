@@ -1,4 +1,4 @@
-package servlet;
+xpackage servlet;
 
 import dao.StudentDAO;
 import jakarta.servlet.annotation.WebServlet;
